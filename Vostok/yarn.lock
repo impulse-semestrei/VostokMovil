@@ -1966,6 +1966,13 @@ expo-font@~7.0.0:
   dependencies:
     fontfaceobserver "^2.1.0"
 
+expo-google-sign-in@~7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/expo-google-sign-in/-/expo-google-sign-in-7.0.0.tgz#edeaeaa05ec3e91d828a4a399f33aa20cbc1e869"
+  integrity sha512-amA2qUt75fSptFFycZJIvdQciOfgd1z3347vDee6JmRldLJq6BvaWoNf/394xyAW6JwQGxpWxhKiy0HQZvKGQQ==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-keep-awake@~7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-7.0.0.tgz#131f56bc1ed8dd66e64a159afd7eaef26939d929"
@@ -4167,11 +4174,6 @@ react-native-branch@~3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-3.0.1.tgz#5b07b61cbd290168cd3c3662e017ebe0f356d2ca"
   integrity sha512-vbcYxPZlpF5f39GAEUF8kuGQqCNeD3E6zEdvtOq8oCGZunHXlWlKgAS6dgBKCvsHvXgHuMtpvs39VgOp8DaKig==
-
-react-native-google-signin@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-2.0.0.tgz#0d9cb128a65c0b48216716b979c1ada35900ceb0"
-  integrity sha512-9loM4lcCIdbco5BnmNio7yGaXQKCpCaY1VRmYiTSvC5NjuSf6Ui6jZRee46p/YdaU4yRnS3u5Vct6Psrvr0HNg==
 
 react-native-view-shot@2.6.0:
   version "2.6.0"

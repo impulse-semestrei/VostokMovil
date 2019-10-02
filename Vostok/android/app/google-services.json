@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "194279441643",
+    "firebase_url": "https://vostok-32ce7.firebaseio.com",
+    "project_id": "vostok-32ce7",
+    "storage_bucket": "vostok-32ce7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194279441643:android:b620e1850de4d56fa42aae",
+        "android_client_info": {
+          "package_name": "vostok.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194279441643-pc5dflaqei2r33skq520m8os0qrgm781.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZYWpQvBHgyg0gL6_EJHKg-JiIXgb448Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194279441643-pc5dflaqei2r33skq520m8os0qrgm781.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

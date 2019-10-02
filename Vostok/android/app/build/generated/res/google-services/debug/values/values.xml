@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">194279441643-pc5dflaqei2r33skq520m8os0qrgm781.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://vostok-32ce7.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">194279441643</string>
+    <string name="google_api_key" translatable="false">AIzaSyDZYWpQvBHgyg0gL6_EJHKg-JiIXgb448Q</string>
+    <string name="google_app_id" translatable="false">1:194279441643:android:b620e1850de4d56fa42aae</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDZYWpQvBHgyg0gL6_EJHKg-JiIXgb448Q</string>
+    <string name="google_storage_bucket" translatable="false">vostok-32ce7.appspot.com</string>
+    <string name="project_id" translatable="false">vostok-32ce7</string>
+</resources>
