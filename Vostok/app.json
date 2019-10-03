@@ -34,7 +34,8 @@
     "android": {
       "package": "vostok.app",
       "publishBundlePath": "android\\app\\src\\main\\assets\\shell-app.bundle",
-      "publishManifestPath": "android\\app\\src\\main\\assets\\shell-app-manifest.json"
+      "publishManifestPath": "android\\app\\src\\main\\assets\\shell-app-manifest.json",
+      "googleServicesFile": "./android/app/google-services.json"
     }
   }
 }
