@@ -1,18 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image,TouchableOpacity, Platform  } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image, TouchableOpacity, Platform  } from 'react-native';
 
 //FONDO DE LOGIN--
 import background from './imagenes/home_background.jpg';
 
 //logo
 import logo from './imagenes/logo.png';
-import boton from './imagenes/boton.jpeg';
 
 const { width: WIDTH } = Dimensions.get('window');
 
-
 export default class Login extends React.Component {
-
 
   render(){
 

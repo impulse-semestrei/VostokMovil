@@ -1,4 +1,0 @@
-#Wed Oct 02 11:49:42 CDT 2019
-base.0=D\:\\IMPULSE\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\8
-path.0=classes.dex
-renamed.0=classes.dex

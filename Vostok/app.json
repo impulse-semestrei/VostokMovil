@@ -1,44 +1,4 @@
 {
-  "expo": {
-    "name": "Rescate 1",
-    "slug": "Vostok",
-    "privacy": "public",
-    "sdkVersion": "35.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "isDetached": true,
-    "detach": {
-      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.13.0-sdk35.0.0-b816b7af-88da-4ca9-87a5-7438f0c21b6e.tar.gz"
-    },
-    "scheme": "exp252d32095b6d47e4aaa8f9989c1ac5b0",
-    "android": {
-      "package": "vostok.app",
-      "publishBundlePath": "android\\app\\src\\main\\assets\\shell-app.bundle",
-      "publishManifestPath": "android\\app\\src\\main\\assets\\shell-app-manifest.json",
-      "googleServicesFile": "./android/app/google-services.json"
-    },
-    "entryPoint": "node_modules/expo/AppEntry.js"
-  },
-  "displayName": "Rescate 1",
-  "name": "Vostok"
+  "name": "Vostok",
+  "displayName": "Vostok"
 }
