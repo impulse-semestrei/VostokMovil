@@ -36,6 +36,9 @@
       "publishBundlePath": "android\\app\\src\\main\\assets\\shell-app.bundle",
       "publishManifestPath": "android\\app\\src\\main\\assets\\shell-app-manifest.json",
       "googleServicesFile": "./android/app/google-services.json"
-    }
-  }
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "Rescate 1",
+  "name": "Vostok"
 }

@@ -1,18 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image,TouchableOpacity  } from 'react-native';
-
+import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image,TouchableOpacity, Platform  } from 'react-native';
 
 //FONDO DE LOGIN--
-import background from './imagenes/home_background.jpg'
+import background from './imagenes/home_background.jpg';
 
 //logo
-import logo from './imagenes/logo.png'
-import boton from './imagenes/boton.jpeg'
+import logo from './imagenes/logo.png';
+import boton from './imagenes/boton.jpeg';
+
 const { width: WIDTH } = Dimensions.get('window');
 
+
 export default class Login extends React.Component {
+
+
   render(){
+
     return (
+
       <ImageBackground source={background} style={styles.container}>
 
       <View style={styles.Imagecontainer}>
@@ -20,16 +25,10 @@ export default class Login extends React.Component {
         </Image>
       </View>
 
-      <View style={styles.Botoncontainer}>
-      <Image source={boton} style={styles.boton}>
-      </Image>
-      </View>
-
       </ImageBackground>
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

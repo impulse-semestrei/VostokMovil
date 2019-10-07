@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image,Touc
 
 const { width: WIDTH } = Dimensions.get('window');
 
-export default class Login extends React.Component {
+export default class Home extends React.Component {
   render(){
     return (
       <Text> Holis </Text>
