@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Oct 07 12:28:28 CDT 2019
+#Tue Oct 08 12:33:27 CDT 2019
 33.base=D\:\\IMPULSE\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 47.base=D\:\\IMPULSE\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
 50.base=D\:\\IMPULSE\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\transforms\\mergeJniLibs\\debug\\0
