@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "359237875627",
+    "firebase_url": "https://rescate1-4624a.firebaseio.com",
+    "project_id": "rescate1-4624a",
+    "storage_bucket": "rescate1-4624a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359237875627:android:64a9730ed3a40b864c04ee",
+        "android_client_info": {
+          "package_name": "com.vostok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359237875627-8lasvg6rcn590k3bh77jtqehufnhpcj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFujpY0msav7yd0K7JotZBtJ6FhKZCsLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359237875627-8lasvg6rcn590k3bh77jtqehufnhpcj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
