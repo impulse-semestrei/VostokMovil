@@ -10,7 +10,7 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar,} from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-
+import HomeScreen from './HomeScreen.js'
 import Login from './Login.js';
 
 
@@ -19,6 +19,11 @@ import Login from './Login.js';
     navigationOptions: {
       header: null
       }
+    },
+    HomeScreen: {screen: HomeScreen,
+      navigationOptions: {
+        header: null
+        }
     },
 });
 const App = createAppContainer(Navigation);
