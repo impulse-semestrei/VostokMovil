@@ -37,7 +37,7 @@ export default class Login extends React.Component {
       this.props.navigation.navigate('HomeScreen', {
       NameOBJ: this.state.userInfo && this.state.userInfo.user && this.state.userInfo.user.name,
       EmailOBJ: this.state.userInfo && this.state.userInfo.user && this.state.userInfo.user.email,
-      IdOBJ: this.state.userInfo && this.state.userInfo.user && this.state.userInfo.user.id,
+      IdOBJ: this.state.userInfo && this.state.userInfo.serverAuthCode,
     });
 
     } catch (error) {

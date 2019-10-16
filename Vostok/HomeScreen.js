@@ -11,7 +11,7 @@ export default class HomeScreen extends React.Component {
     }
 
     componentDidMount(){
-      return fetch('http://10.0.2.2:8000/api/api/1')
+      return fetch(`http://10.0.2.2:8000/api/test/?serverAuthCode=${encodeURIComponent(this.props.navigation.state.params.IdOBJ)}`)
         .then((response) => response.json())
         .then((responseJson) => {
 
