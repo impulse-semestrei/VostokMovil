@@ -26,6 +26,7 @@ export default class Login extends React.Component {
           offlineAccess: true,
           hostedDomain: '',
           forceConsentPrompt: true,
+          iosClientId:'359237875627-p265pjmr9b6ff4le2sau22529tk7or7a.apps.googleusercontent.com',
         });
       }
 
