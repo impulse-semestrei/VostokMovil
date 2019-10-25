@@ -1,72 +1,96 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image, TouchableOpacity, Platform,  } from 'react-native';
-
-
+import { StyleSheet, Text, View, Button,TextInput } from 'react-native';
+import Swiper from 'react-native-deck-swiper'
 
 export default class HomeScreen extends React.Component {
 
   constructor(props){
       super(props);
-      this.state ={ isLoading: true}
+      this.state = {text:'',materiales:null,isLoading:true}
+
+
+
+
     }
 
     componentDidMount(){
-      return fetch(`http://10.0.2.2:8000/api/test/?serverAuthCode=${encodeURIComponent(this.props.navigation.state.params.IdOBJ)}`)
-        .then((response) => response.json())
+     return fetch(`http://localhost:8000/inventario/1/json/`)
+
+       .then((response) =>response.json())
+
         .then((responseJson) => {
 
           this.setState({
             isLoading: false,
-            dataSource: responseJson,
-          }, function(){
-
-          });
+            materiales: responseJson.materiales,
+          }
+        );
 
         })
         .catch((error) =>{
           console.error(error);
         });
+
+
+   }
+
+
+
+
+    render(){
+      if (this.state.isLoading){
+        return(
+          <Text style={styles.text}>Loading</Text>
+        )
+      }
+      return(
+        <View style={styles.container}>
+          <Swiper
+              cards={this.state.materiales}
+              renderCard={(material) => {
+                  return (
+                      <View style={styles.card}>
+                          <Text style={styles.text}>{material.nombre}</Text>
+                          <Text style={styles.text}>{material.cantidad}</Text>
+
+                      </View>
+                  )
+              }}
+              goBackToPreviousCardOnSwipeRight = {true}
+              showSecondCard={false}
+              onSwiped={(cardIndex) => {console.log(cardIndex)}}
+              onSwipedAll={() => {console.log('onSwipedAll')}}
+              cardIndex={0}
+              backgroundColor={'#4FD0E9'}
+              stackSize= {3}>
+              <Button
+                  onPress={() => {console.log('oulala')}}
+                  title="Press me">
+                  You can press me
+              </Button>
+          </Swiper>
+      </View>
+    );
+
+
     }
-
-
-render(){
-  if(this.state.isLoading){
-    return(
-      <View style={{flex: 1, padding: 20}}>
-        <Text>LOADING</Text>
-      </View>
-    )
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F5FCFF"
+  },
+  card: {
+    flex: 1,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#E8E8E8",
+    justifyContent: "center",
+    backgroundColor: "white"
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 50,
+    backgroundColor: "transparent"
   }
-
-
-return (
-  <View>
-      <Text>{this.state.dataSource.username}</Text>
-      <Text>{this.state.dataSource.email}</Text>
-      <Text>{this.state.dataSource.is_staff}</Text>
-      <View>
-        <Text>User Info</Text>
-      </View>
-      <View>
-        <Text>Name</Text>
-        <Text>{this.props.navigation.state.params.NameOBJ}</Text>
-      </View>
-      <View>
-        <Text>Email</Text>
-        <Text>{this.props.navigation.state.params.EmailOBJ}</Text>
-      </View>
-      <View>
-        <Text>ID</Text>
-        <Text>{this.props.navigation.state.params.IdOBJ}</Text>
-      </View>
-  </View>
-
-
-
-
-
-
-
-  );
-}
-}
+});
