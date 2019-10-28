@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button,TextInput } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
+import TextBox from './TextBox.js'
 
 export default class HomeScreen extends React.Component {
 
@@ -14,7 +15,7 @@ export default class HomeScreen extends React.Component {
     }
 
     componentDidMount(){
-     return fetch(`http://localhost:8000/inventario/1/json/`)
+     return fetch(`http://10.0.2.2:8000/inventario/2/json/`)
 
        .then((response) =>response.json())
 
@@ -22,7 +23,7 @@ export default class HomeScreen extends React.Component {
 
           this.setState({
             isLoading: false,
-            materiales: responseJson.materiales,
+            materiales: responseJson.materiales
           }
         );
 
@@ -43,6 +44,7 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.text}>Loading</Text>
         )
       }
+
       return(
         <View style={styles.container}>
           <Swiper
@@ -51,23 +53,47 @@ export default class HomeScreen extends React.Component {
                   return (
                       <View style={styles.card}>
                           <Text style={styles.text}>{material.nombre}</Text>
-                          <Text style={styles.text}>{material.cantidad}</Text>
-
+                          <TextBox
+                            default={material.cantidad+''}
+                            onChange={
+                              text => {
+                                let copy = this.state
+                                for(let item of copy.materiales){
+                                  if(item.id == material.id){
+                                    item.cantidad = parseInt(text)
+                                    this.setState(copy)
+                                    return
+                                  }
+                                }
+                              }
+                            }
+                          />
                       </View>
                   )
               }}
               goBackToPreviousCardOnSwipeRight = {true}
               showSecondCard={false}
               onSwiped={(cardIndex) => {console.log(cardIndex)}}
-              onSwipedAll={() => {console.log('onSwipedAll')}}
+              onSwipedAll={
+                () => {
+                  let data = {
+                    paramedico: "Su Majestad, Eduardo",
+                    materiales: this.state.materiales
+                  }
+                  console.log(data)
+                  fetch('http://10.0.2.2:8000/inventario/2/json/', {
+                    method: 'POST',
+                    headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                  });
+                }
+              }
               cardIndex={0}
               backgroundColor={'#4FD0E9'}
               stackSize= {3}>
-              <Button
-                  onPress={() => {console.log('oulala')}}
-                  title="Press me">
-                  You can press me
-              </Button>
           </Swiper>
       </View>
     );
