@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button,TextInput } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
 
+
 export default class HomeScreen extends React.Component {
 
   constructor(props){
@@ -15,7 +16,8 @@ export default class HomeScreen extends React.Component {
     }
 
     componentDidMount(){
-     return fetch(`http://10.0.2.2:8000/inventario/2/json/`)
+
+      return fetch(`http://localhost:8000/inventario/1/json/`)
 
        .then((response) =>response.json())
 
@@ -31,6 +33,7 @@ export default class HomeScreen extends React.Component {
         .catch((error) =>{
           console.error(error);
         });
+
 
 
    }
@@ -53,7 +56,10 @@ export default class HomeScreen extends React.Component {
                   return (
                       <View style={styles.card}>
                           <Text style={styles.text}>{material.nombre}</Text>
+                          <Text style={styles.objetivo}>{"Objetivo:  "+material.objetivo}</Text>
                           <TextBox
+                            style={styles.TextBox}
+                            objetivo = {material.objetivo}
                             default={material.cantidad+''}
                             onChange={
                               text => {
@@ -74,14 +80,17 @@ export default class HomeScreen extends React.Component {
               goBackToPreviousCardOnSwipeRight = {true}
               showSecondCard={false}
               onSwiped={(cardIndex) => {console.log(cardIndex)}}
+
+
               onSwipedAll={
                 () => {
                   let data = {
-                    paramedico: "Su Majestad, Eduardo",
+                    nombre_paramedico: this.props.navigation.getParam('NameOBJ'),
+                    email_paramedico: this.props.navigation.getParam('EmailOBJ'),
                     materiales: this.state.materiales
                   }
                   console.log(data)
-                  fetch('http://10.0.2.2:8000/inventario/2/json/', {
+                  fetch('http://localhost:8000/inventario/1/json/', {
                     method: 'POST',
                     headers: {
                       Accept: 'application/json',
@@ -92,7 +101,7 @@ export default class HomeScreen extends React.Component {
                 }
               }
               cardIndex={0}
-              backgroundColor={'#4FD0E9'}
+              backgroundColor={'#e47c1d'}
               stackSize= {3}>
           </Swiper>
       </View>
@@ -104,19 +113,29 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "#e47c1d"
   },
   card: {
     flex: 1,
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: "#E8E8E8",
+    borderColor: "#F6A02C",
     justifyContent: "center",
-    backgroundColor: "white"
+    backgroundColor: "#FFFFFF"
   },
   text: {
     textAlign: "center",
     fontSize: 50,
     backgroundColor: "transparent"
+  },
+  TextBox:{
+    backgroundColor: '#E8E8E8',
+
+
+  },
+  objetivo:{
+    fontSize: 30,
+    color : 'green',
+    textAlign:'center',
   }
 });
