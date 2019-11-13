@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "359237875627-iqs4k4mfrf9efllkkelsg92dgujmsrje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vostok",
+            "certificate_hash": "c50e27bf6564398a4c3591fb886823e3bfabc9d2"
+          }
+        },
+        {
+          "client_id": "359237875627-v735ac6vbd4ekrbb663lkk6he0dshjb5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vostok",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "359237875627-8lasvg6rcn590k3bh77jtqehufnhpcj4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +46,13 @@
             {
               "client_id": "359237875627-8lasvg6rcn590k3bh77jtqehufnhpcj4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "359237875627-p265pjmr9b6ff4le2sau22529tk7or7a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "Rescate1IOS"
+              }
             }
           ]
         }

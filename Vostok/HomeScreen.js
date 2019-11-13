@@ -17,7 +17,7 @@ export default class HomeScreen extends React.Component {
 
     componentDidMount(){
 
-      return fetch(`http://localhost:8000/inventario/1/json/`)
+      return fetch(`https://rescate1app.com/inventario/1/json/`)
 
        .then((response) =>response.json())
 
@@ -90,7 +90,7 @@ export default class HomeScreen extends React.Component {
                     materiales: this.state.materiales
                   }
                   console.log(data)
-                  fetch('http://localhost:8000/inventario/1/json/', {
+                  fetch('https://rescate1app.com/inventario/1/json/', {
                     method: 'POST',
                     headers: {
                       Accept: 'application/json',

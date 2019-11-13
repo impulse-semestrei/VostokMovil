@@ -91,7 +91,7 @@ export default class Login extends React.Component {
       </View>
 
       <GoogleSigninButton
-        style={{ width: 192, height: 48, marginHorizontal:85, }}
+        style={{ width: 192, height: 48, alignSelf:'center', }}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Light}
         onPress={this._signIn}
