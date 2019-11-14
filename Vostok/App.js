@@ -12,9 +12,20 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from './HomeScreen.js'
 import Login from './Login.js';
-
+import Menu from './Menu.js';
+import DashAmbulancia from './DashAmbulancia';
 
   const Navigation = createStackNavigator({
+    Ambulancia: {screen: DashAmbulancia,
+      navigationOptions: {
+        header: null
+        }
+    },
+    Menu: {screen: Menu,
+      navigationOptions: {
+        header: null
+        }
+    },
     First: {screen: Login,
     navigationOptions: {
       header: null
@@ -25,6 +36,7 @@ import Login from './Login.js';
         header: null
         }
     },
+
 });
 const App = createAppContainer(Navigation);
 export default App;

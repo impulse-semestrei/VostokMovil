@@ -35,7 +35,7 @@ export default class Login extends React.Component {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       this.setState({ userInfo: userInfo, loggedIn: true});
-      this.props.navigation.navigate('HomeScreen', {
+      this.props.navigation.navigate('Menu', {
       NameOBJ: this.state.userInfo && this.state.userInfo.user && this.state.userInfo.user.name,
       EmailOBJ: this.state.userInfo && this.state.userInfo.user && this.state.userInfo.user.email,
       IdOBJ: this.state.userInfo && this.state.userInfo.serverAuthCode,
