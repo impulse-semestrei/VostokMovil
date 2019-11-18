@@ -10,6 +10,60 @@ import ambulance from './imagenes/ambulance.png'
 
 export default class Login extends React.Component {
 
+  constructor(props){
+      super(props);
+      this.state = {
+        text:'',
+        ambulancias:null,
+        isLoading:true
+      }
+    }
+
+    componentDidMount(){
+      let ambulanciasArray = [
+        {
+         id: 1,
+         idInventario: 1
+        },
+        {
+         id: 3,
+         idInventario: 3
+        },
+        {
+         id: 4,
+         idInventario: 4
+        },
+        {
+         id: 2,
+         idInventario: 2
+        }
+      ];
+
+
+      // fetch
+
+      this.setState({
+        isLoading: false,
+        ambulancias: ambulanciasArray
+      });
+    }
+
+/*
+      return fetch(`http://10.0.2.2:8000/inventario/4/json/`)
+
+       .then((response) =>response.json())
+
+        .then((responseJson) => {
+
+
+
+        })
+        .catch((error) =>{
+          console.error(error);
+        });
+
+
+*/
 
 
 
@@ -18,6 +72,39 @@ export default class Login extends React.Component {
 
 
 render(){
+  if (this.state.isLoading){
+    return(
+      <Text style={styles.text}>Loading</Text>
+    )
+  }
+
+  let redirect = (idAmbulancia, idInventario) => () => {
+    this.props.navigation.navigate('Menu', {
+      nombre_paramedico: this.props.navigation.getParam('NameOBJ'),
+      email_paramedico: this.props.navigation.getParam('EmailOBJ'),
+      id_ambulancia: idAmbulancia,
+      id_inventario: idInventario
+    });
+  }
+
+  let buttonsArray = [];
+  this.state.ambulancias.forEach(
+    (ambulancia) => {
+      buttonsArray.push(
+        <TouchableOpacity key={ambulancia.id}
+          onPress = {redirect(ambulancia.id, ambulancia.idInventario)}
+          style={styles.ambulanceContainer} >
+          <View style={styles.dir}>
+            <Image style={styles.ambulance}
+                source={ambulance}
+                resizeMode="contain"
+            />
+            <Text style={styles.text}> {ambulancia.id}   </Text>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+  );
   return (
 
 
@@ -27,116 +114,7 @@ render(){
     <Text style={styles.title}>   Ambulancias   </Text>
     <ScrollView style={styles.scrollView}>
     <View style={styles.buttonContainer}>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    <Text style={styles.text}> 1 </Text>
-    </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    <Text style={styles.text}> 3 </Text>
-    </View>
-    </TouchableOpacity>
-
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    <Text style={styles.text}> 5</Text>
-    </View>
-    </TouchableOpacity>
-
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    <Text style={styles.text}> 2 </Text>
-    </View>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    </View>
-    <Text style={styles.text}> 4 </Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    </View>
-    <Text style={styles.text}> 6 </Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    </View>
-    <Text style={styles.text}> 6 </Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    </View>
-    <Text style={styles.text}> 6 </Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    </View>
-    <Text style={styles.text}> 6 </Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.ambulanceContainer} >
-    <View style={styles.dir}>
-    <Image style={styles.ambulance}
-        source={ambulance}
-        resizeMode="contain"
-    />
-    </View>
-    <Text style={styles.text}> 6 </Text>
-    </TouchableOpacity>
-
-
-
-
-
-
-
+      { buttonsArray }
     </View>
 
 

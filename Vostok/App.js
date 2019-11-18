@@ -14,8 +14,13 @@ import HomeScreen from './HomeScreen.js'
 import Login from './Login.js';
 import Menu from './Menu.js';
 import DashAmbulancia from './DashAmbulancia';
-
+import EstadoAmbulancia from './EstadoAmbulancia.js';
   const Navigation = createStackNavigator({
+    First: {screen: Login,
+    navigationOptions: {
+      header: null
+      }
+    },
     Ambulancia: {screen: DashAmbulancia,
       navigationOptions: {
         header: null
@@ -26,17 +31,16 @@ import DashAmbulancia from './DashAmbulancia';
         header: null
         }
     },
-    First: {screen: Login,
-    navigationOptions: {
-      header: null
-      }
-    },
     HomeScreen: {screen: HomeScreen,
       navigationOptions: {
         header: null
         }
     },
-
+    EstadoAmbulancia: {screen: EstadoAmbulancia,
+      navigationOptions: {
+        header: null
+        }
+    },
 });
 const App = createAppContainer(Navigation);
 export default App;

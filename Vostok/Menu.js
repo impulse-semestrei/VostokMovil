@@ -21,15 +21,31 @@ render(){
 
     <ImageBackground source={background} style={styles.container}>
     <Text style={styles.title}>   Checklists   </Text>
-    <Text style={styles.num}>  Ambulancia #ID </Text>
+    <Text style={styles.num}>  Ambulancia {this.props.navigation.getParam('id_ambulancia')}</Text>
     <View style={styles.buttonContainer}>
 
-    <TouchableOpacity style={styles.btnMenu}>
-    <Text style={styles.text} > Inventario </Text>
+    <TouchableOpacity
+      onPress={
+        () => this.props.navigation.navigate('HomeScreen', {
+          nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
+          email_paramedico: this.props.navigation.getParam('email_paramedico'),
+          id_inventario: this.props.navigation.getParam('id_inventario')
+        })
+      }
+      style={styles.btnMenu}  >
+      <Text style={styles.text} > Inventario </Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.btnMenu}>
-    <Text style={styles.text} > Ambulancia </Text>
+    <TouchableOpacity
+      onPress={
+        () => this.props.navigation.navigate('EstadoAmbulancia', {
+          nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
+          email_paramedico: this.props.navigation.getParam('email_paramedico'),
+          id_ambulancia: this.props.navigation.getParam('id_ambulancia')
+        })
+      }
+      style={styles.btnMenu}>
+      <Text style={styles.text} > Ambulancia </Text>
     </TouchableOpacity>
 
     </View>
