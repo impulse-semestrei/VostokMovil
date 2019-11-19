@@ -17,7 +17,7 @@ export default class EstadoAmbulancia extends React.Component {
 
     componentDidMount(){
 
-      return fetch('http://10.0.2.2:8000/inventario/'+this.props.navigation.getParam('id_ambulancia')+'/json/')
+      return fetch('http://10.0.2.2:8000/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/')
 
        .then((response) =>response.json())
 
@@ -25,7 +25,7 @@ export default class EstadoAmbulancia extends React.Component {
 
           this.setState({
             isLoading: false,
-            materiales: responseJson.materiales
+            materiales: responseJson.elementos
           }
         );
 
@@ -84,13 +84,14 @@ export default class EstadoAmbulancia extends React.Component {
 
               onSwipedAll={
                 () => {
+                  return;
                   let data = {
                     nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
                     email_paramedico: this.props.navigation.getParam('email_paramedico'),
-                    materiales: this.state.materiales
+                    elementos: this.state.materiales
                   }
                   console.log(data)
-                  fetch('http://10.0.2.2:8000/inventario/'+this.props.navigation.getParam('id_ambulancia')+'/json/', {
+                  fetch('http://10.0.2.2:8000/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/', {
                     method: 'POST',
                     headers: {
                       Accept: 'application/json',
