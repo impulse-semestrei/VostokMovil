@@ -61,7 +61,7 @@ export default class Login extends React.Component {
                   source={ambulance}
                   resizeMode="contain"
               />
-              <Text style={styles.text}> {ambulancia.id}   </Text>
+              <Text style={styles.text}> {ambulancia.nombre} </Text>
             </View>
           </TouchableOpacity>
         )

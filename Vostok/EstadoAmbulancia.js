@@ -8,51 +8,71 @@ export default class EstadoAmbulancia extends React.Component {
 
   constructor(props){
       super(props);
-      this.state = {text:'',materiales:null,isLoading:true}
-
-
-
-
+      this.state = {
+        text:'',
+        materiales:null,
+        isLoading:true,
+        isLast:false,
+        isFirst:true,
+        isSent:false
+      }
     }
 
     componentDidMount(){
-
       return fetch('http://10.0.2.2:8000/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/')
-
        .then((response) =>response.json())
-
         .then((responseJson) => {
-
           this.setState({
             isLoading: false,
-            materiales: responseJson.elementos
+            materiales: responseJson.elementos,
+            isLast: false,
+            isFirst: true,
+            isSent:false
           }
         );
-
         })
         .catch((error) =>{
           console.error(error);
         });
-
-
-
-   }
-
-
-
+     }
 
     render(){
-      if (this.state.isLoading){
+      if (this.state.isSent){
         return(
-          <Text style={styles.text}>Loading</Text>
+          <View style={styles.container}>
+            <View style={styles.statusMessage}>
+              <Text style={styles.text}>Se ha enviado la checklist</Text>
+            </View>
+          </View>
         )
       }
-
+      if (this.state.isLoading){
+        return(
+          <View style={styles.container}>
+              <Text style={styles.statusMessage}>Cargando...</Text>
+          </View>
+        )
+      }
+      let cards = []
+      this.state.materiales.forEach(material => cards.push(material))
+      let lastCardIndex = this.state.materiales.length
+      cards.push({"nombre": "last"})
       return(
         <View style={styles.container}>
           <Swiper
-              cards={this.state.materiales}
+              cards={cards}
+              disableRightSwipe = {this.state.isFirst}
+              disableTopSwipe = {!this.state.isLast}
+              disableBottomSwipe = {true}
+              disableLeftSwipe = {this.state.isLast}
               renderCard={(material) => {
+                  if(material.nombre == "last"){
+                    return(
+                      <View style={styles.card}>
+                          <Text style={styles.text}>Desliza hacia arriba para enviar la checklist</Text>
+                      </View>
+                    )
+                  }
                   return (
                       <View style={styles.card}>
                           <Text style={styles.text}>{material.nombre}</Text>
@@ -79,18 +99,40 @@ export default class EstadoAmbulancia extends React.Component {
               }}
               goBackToPreviousCardOnSwipeRight = {true}
               showSecondCard={false}
-              onSwiped={(cardIndex) => {console.log(cardIndex)}}
-
-
+              onSwipedLeft={
+                (cardIndex) => {
+                  console.log('swipeleft')
+                  let copy = this.state
+                  copy.isLast = false
+                  copy.isFirst = false
+                  if(cardIndex == lastCardIndex-1)
+                    copy.isLast = true
+                  this.setState(copy)
+                }
+              }
+              onSwipedRight={
+                (cardIndex) => {
+                  console.log('swiperight')
+                  let copy = this.state
+                  copy.isFirst = false
+                  copy.isLast = false
+                  if(cardIndex == 1)
+                    copy.isFirst = true
+                  this.setState(copy)
+                }
+              }
               onSwipedAll={
                 () => {
-                  return;
                   let data = {
                     nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
                     email_paramedico: this.props.navigation.getParam('email_paramedico'),
                     elementos: this.state.materiales
                   }
-                  console.log(data)
+
+                  let copy = this.state
+                  copy.isSent = true
+                  this.setState(copy)
+
                   fetch('http://10.0.2.2:8000/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/', {
                     method: 'POST',
                     headers: {
@@ -116,6 +158,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#e47c1d"
   },
+  statusMessage: {
+    flex: 1,
+    justifyContent: "center"
+  },
   card: {
     flex: 1,
     borderRadius: 4,
@@ -131,8 +177,6 @@ const styles = StyleSheet.create({
   },
   TextBox:{
     backgroundColor: '#E8E8E8',
-
-
   },
   objetivo:{
     fontSize: 30,
