@@ -4,7 +4,7 @@ import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
 
 
-export default class HomeScreen extends React.Component {
+export default class Checklist extends React.Component {
 
   constructor(props){
       super(props);
@@ -19,7 +19,7 @@ export default class HomeScreen extends React.Component {
     }
 
     componentDidMount(){
-      return fetch('http://10.0.2.2:8000/inventario/'+this.props.navigation.getParam('id_inventario')+'/json/')
+      return fetch(this.props.url)
        .then((response) =>response.json())
         .then((responseJson) => {
           this.setState({
@@ -124,8 +124,8 @@ export default class HomeScreen extends React.Component {
               onSwipedAll={
                 () => {
                   let data = {
-                    nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
-                    email_paramedico: this.props.navigation.getParam('email_paramedico'),
+                    nombre_paramedico: this.props.nombre_paramedico,
+                    email_paramedico: this.props.email_paramedico,
                     materiales: this.state.materiales
                   }
 
@@ -133,7 +133,7 @@ export default class HomeScreen extends React.Component {
                   copy.isSent = true
                   this.setState(copy)
 
-                  fetch('http://10.0.2.2:8000/inventario/'+this.props.navigation.getParam('id_inventario')+'/json/', {
+                  fetch(this.props.url, {
                     method: 'POST',
                     headers: {
                       Accept: 'application/json',

@@ -26,7 +26,7 @@ render(){
 
     <TouchableOpacity
       onPress={
-        () => this.props.navigation.navigate('HomeScreen', {
+        () => this.props.navigation.navigate('InventarioAmbulancia', {
           nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
           email_paramedico: this.props.navigation.getParam('email_paramedico'),
           id_inventario: this.props.navigation.getParam('id_inventario')

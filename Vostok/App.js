@@ -10,7 +10,7 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar,} from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from './HomeScreen.js'
+import InventarioAmbulancia from './InventarioAmbulancia.js'
 import Login from './Login.js';
 import Menu from './Menu.js';
 import DashAmbulancia from './DashAmbulancia';
@@ -31,7 +31,7 @@ import EstadoAmbulancia from './EstadoAmbulancia.js';
         header: null
         }
     },
-    HomeScreen: {screen: HomeScreen,
+    InventarioAmbulancia: {screen: InventarioAmbulancia,
       navigationOptions: {
         header: null
         }
