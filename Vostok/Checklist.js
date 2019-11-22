@@ -9,12 +9,13 @@ export default class Checklist extends React.Component {
   constructor(props){
       super(props);
       this.state = {
-        text:'',
+        text:"",
         materiales:null,
         isLoading:true,
         isLast:false,
         isFirst:true,
-        isSent:false
+        isSent:false,
+        observaciones:""
       }
     }
 
@@ -27,7 +28,8 @@ export default class Checklist extends React.Component {
             materiales: responseJson.materiales,
             isLast: false,
             isFirst: true,
-            isSent:false
+            isSent:false,
+            observaciones:""
           }
         );
         })
@@ -55,7 +57,8 @@ export default class Checklist extends React.Component {
       }
       let cards = []
       this.state.materiales.forEach(material => cards.push(material))
-      let lastCardIndex = this.state.materiales.length
+      let observacionesIndex = this.state.materiales.length
+      cards.push({"nombre": "observaciones"})
       cards.push({"nombre": "last"})
       return(
         <View style={styles.container}>
@@ -70,6 +73,30 @@ export default class Checklist extends React.Component {
                     return(
                       <View style={styles.card}>
                           <Text style={styles.text}>Desliza hacia arriba para enviar la checklist</Text>
+                      </View>
+                    )
+                  }
+                  if(material.nombre == "observaciones"){
+                    return(
+                      <View style={styles.card}>
+                          <Text style={styles.text}>Observaciones Generales</Text>
+                          <View style={styles.textInputContainer}>
+                            <TextInput
+                              style={styles.textInput}
+                              multiline={true}
+                              placeholder={'Escribe aqui'}
+                              maxLength={250}
+                              numberOfLines={3}
+                              onChangeText={
+                                text => {
+                                  let copy = this.state
+                                  copy.observaciones = text
+                                  this.setState(copy)
+                                }
+                              }
+
+                            />
+                        </View>
                       </View>
                     )
                   }
@@ -105,7 +132,7 @@ export default class Checklist extends React.Component {
                   let copy = this.state
                   copy.isLast = false
                   copy.isFirst = false
-                  if(cardIndex == lastCardIndex-1)
+                  if(cardIndex == observacionesIndex)
                     copy.isLast = true
                   this.setState(copy)
                 }
@@ -126,8 +153,11 @@ export default class Checklist extends React.Component {
                   let data = {
                     nombre_paramedico: this.props.nombre_paramedico,
                     email_paramedico: this.props.email_paramedico,
-                    materiales: this.state.materiales
+                    materiales: this.state.materiales,
+                    observaciones: this.state.observaciones
                   }
+
+                  console.log(data)
 
                   let copy = this.state
                   copy.isSent = true
@@ -172,15 +202,28 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    fontSize: 50,
+    fontSize: 55,
     backgroundColor: "transparent"
   },
   TextBox:{
     backgroundColor: '#E8E8E8',
+    justifyContent: 'center'
   },
   objetivo:{
-    fontSize: 30,
+    fontSize: 25,
     color : 'green',
     textAlign:'center',
+  },
+  textInputContainer:{
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight:10,
+  },
+  textInput:{
+    fontSize: 20,
+    color : 'black',
+
   }
 });
