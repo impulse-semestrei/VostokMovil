@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\eduar\\Documents\\semestrei\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt\\values-pt.xml",
+            "outputFile": "D:\\IMPULSE\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt\\values-pt.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\eduar\\.gradle\\caches\\transforms-2\\files-2.1\\1303de93464cbb874c6476e5a3a6665d\\res\\values-pt\\values-pt.xml",
+                    "source": "C:\\Users\\bobna\\.gradle\\caches\\transforms-2\\files-2.1\\cd668d34c8e8940379b949409d9832e5\\res\\values-pt\\values-pt.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\eduar\\.gradle\\caches\\transforms-2\\files-2.1\\e4e420c46815d25e670f8b2c780f9ae0\\res\\values-pt\\values-pt.xml",
+                    "source": "C:\\Users\\bobna\\.gradle\\caches\\transforms-2\\files-2.1\\addf09591e817eb362bc77e7e70f26c5\\res\\values-pt\\values-pt.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
