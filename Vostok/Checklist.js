@@ -87,6 +87,7 @@ export default class Checklist extends React.Component {
                               placeholder={'Escribe aqui'}
                               maxLength={250}
                               numberOfLines={3}
+                              defaultValue={this.state.observaciones}
                               onChangeText={
                                 text => {
                                   let copy = this.state

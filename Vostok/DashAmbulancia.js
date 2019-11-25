@@ -40,12 +40,13 @@ export default class Login extends React.Component {
       )
     }
 
-    let redirect = (idAmbulancia, idInventario) => () => {
+    let redirect = (idAmbulancia, idInventario, nombreAmbulancia) => () => {
       this.props.navigation.navigate('Menu', {
         nombre_paramedico: this.props.navigation.getParam('NameOBJ'),
         email_paramedico: this.props.navigation.getParam('EmailOBJ'),
         id_ambulancia: idAmbulancia,
-        id_inventario: idInventario
+        id_inventario: idInventario,
+        nombre_ambulancia: nombreAmbulancia
       });
     }
 
@@ -54,7 +55,7 @@ export default class Login extends React.Component {
       (ambulancia) => {
         buttonsArray.push(
           <TouchableOpacity key={ambulancia.id}
-            onPress = {redirect(ambulancia.id, ambulancia.idInventario)}
+            onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
             style={styles.ambulanceContainer} >
             <View style={styles.dir}>
               <Image style={styles.ambulance}
