@@ -59,11 +59,12 @@ export default class TextBox extends React.Component {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 20,
-    marginHorizontal: 140
+    marginHorizontal: 140,
+    alignSelf:'center'
   },
   label: {
     color: '#555555',
-
+    alignSelf:'center'
   },
   textInput: {
     width : 100,
