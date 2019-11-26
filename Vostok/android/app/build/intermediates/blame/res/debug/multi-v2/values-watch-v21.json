@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\IMPULSE\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v21\\values-watch-v21.xml",
+            "outputFile": "C:\\Users\\eduar\\Documents\\semestrei\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v21\\values-watch-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\bobna\\.gradle\\caches\\transforms-2\\files-2.1\\addf09591e817eb362bc77e7e70f26c5\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "C:\\Users\\eduar\\.gradle\\caches\\transforms-2\\files-2.1\\e4e420c46815d25e670f8b2c780f9ae0\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",
