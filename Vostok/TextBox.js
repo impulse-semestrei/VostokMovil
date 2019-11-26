@@ -59,14 +59,14 @@ export default class TextBox extends React.Component {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 20,
-    alignItems: 'center'
+    marginHorizontal: 140
   },
   label: {
     color: '#555555',
-    
+    width: 100
   },
   textInput: {
-    width : 100,
+    width : 60,
     height : 60,
     fontSize: 40,
     textAlign:'center',
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccefc2',
   },
   textInputWrong :{
-    width : 100,
+    width : 60,
     height : 60,
     fontSize: 40,
     textAlign:'center',
