@@ -74,7 +74,7 @@ export default class Login extends React.Component {
 
       <ImageBackground source={background} style={styles.container}>
 
-      <Text style={styles.title}>   Ambulancias   </Text>
+      <Text style={styles.title}>   Unidades   </Text>
       <ScrollView style={styles.scrollView}>
       <View style={styles.buttonContainer}>
         { buttonsArray }

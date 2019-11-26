@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#555555',
-    
+
   },
   textInput: {
     width : 100,
-    height : 60,
+    height : 75,
     fontSize: 40,
     textAlign:'center',
     borderWidth: 1,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   textInputWrong :{
     width : 100,
-    height : 60,
+    height : 75,
     fontSize: 40,
     textAlign:'center',
     borderWidth: 1,

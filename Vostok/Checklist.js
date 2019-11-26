@@ -76,6 +76,46 @@ export default class Checklist extends React.Component {
                       </View>
                     )
                   }
+                  if(this.state.isFirst == true){
+                    return(
+                      <View style={styles.card}>
+
+                          <Text style={styles.text}>{material.nombre}</Text>
+                          <Text style={styles.objetivo}>{"Objetivo:  "+material.objetivo}</Text>
+                          <TextBox
+                            style={styles.TextBox}
+                            objetivo = {material.objetivo}
+                            default={material.cantidad+''}
+                            onChange={
+                              text => {
+                                let copy = this.state
+                                for(let item of copy.materiales){
+                                  if(item.id == material.id){
+                                    item.cantidad = parseInt(text)
+                                    this.setState(copy)
+                                    return
+                                  }
+                                }
+                              }
+                            }
+                          />
+
+                        <View style={styles.tutorialContainer}>
+                          <View style={styles.leftSwipeContainer}>
+                            <Text style={styles.arrowleft}> ↪ </Text>
+                            <Text style={styles.leftSwipe}> Desliza hacia la derecha para ir al material anterior</Text>
+                          </View>
+                          <View style={styles.boxTutorialContainer}>
+                            <Text style={styles.boxTutorial}> Escribe la cantidad actual del material</Text>
+                          </View>
+                          <View style={styles.rightSwipeContainer}>
+                          <Text style={styles.arrowright}> ↩ </Text>
+                            <Text style={styles.rightSwipe}> Desliza hacia la izquierda para ir al siguiente material</Text>
+                          </View>
+                        </View>
+                      </View>
+                    )
+                  }
                   if(material.nombre == "observaciones"){
                     return(
                       <View style={styles.card}>
@@ -205,6 +245,52 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 55,
     backgroundColor: "transparent"
+  },
+  tutorialContainer: {
+  flexDirection: 'row',
+  justifyContent:'flex-end',
+  alignItems: 'stretch'
+  },
+  rightSwipeContainer: {
+    height: 50,
+    width: 110,
+
+  },
+  rightSwipe: {
+    textAlign:'center'
+  },
+  leftSwipeContainer: {
+    height: 50,
+    width: 110,
+    marginRight:15
+  },
+  leftSwipe: {
+    textAlign:'center'
+  },
+  boxTutorialContainer: {
+    height: 50,
+    width: 110,
+    marginRight:20
+
+
+  },
+  boxTutorial: {
+    textAlign:'center'
+  },
+  arrowleft: {
+    fontSize:50,
+    alignSelf: 'center',
+    fontWeight: 'bold'
+  },
+  arrowright: {
+    fontSize:50,
+    alignSelf: 'center',
+    fontWeight: 'bold'
+  },
+  arrowcenter: {
+    fontSize:50,
+    alignSelf: 'center',
+    fontWeight: 'bold'
   },
   TextBox:{
     backgroundColor: '#E8E8E8',
