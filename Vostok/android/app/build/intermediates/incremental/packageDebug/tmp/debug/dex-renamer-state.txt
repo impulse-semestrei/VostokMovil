@@ -1,4 +1,4 @@
-#Mon Nov 25 11:46:55 CST 2019
-base.0=D\:\\IMPULSE\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Sat Nov 23 12:13:13 CST 2019
+base.0=C\:\\Users\\eduar\\Documents\\semestrei\\VostokMovil\\Vostok\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 renamed.0=classes.dex
 path.0=classes.dex
