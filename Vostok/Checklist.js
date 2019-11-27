@@ -44,33 +44,31 @@ export default class Checklist extends React.Component {
     render(){
       if (this.state.isSent){
         if(!this.state.isReady){
+          let items = this.state.missing.map(item => {
+            return(
+              <View key={item.id} style={styles.missingRow}>
+                <Text style={styles.missingItemData}>{item.nombre}</Text>
+                <Text style={styles.missingItemData}>{item.objetivo - item.cantidad}</Text>
+              </View>
+            )
+          })
           return(
             <View style={styles.container}>
               <View style={styles.text}>
                 <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
               </View>
-              <View>
+              <View style={{flex:3, flexDirection:"column"}}>
                 <View>
                   <Text style={styles.tableTitle}>Faltantes:</Text>
                 </View>
                 <ScrollView style={styles.scrollView}>
-                  <FlatList
-                    data={this.state.missing}
-                    renderItem={
-                      ({item}) => {
-                        return(
-                          <View style={styles.missingRow}>
-                            <Text style={styles.missingItemData}>{item.nombre}</Text>
-                            <Text style={styles.missingItemData}>{item.objetivo - item.cantidad}</Text>
-                          </View>
-                        )
-                      }
-                    }
-                  />
+                  {items}
                 </ScrollView>
               </View>
-              <View>
+              <View style={styles.backButtonContainer}>
                 <Button
+                  buttonStyle={styles.backButton}
+                  color="#57c962"
                   title="Regresar"
                   onPress={this.props.onBack}
                 />              
@@ -81,10 +79,12 @@ export default class Checklist extends React.Component {
         return(
           <View style={styles.container}>
             <View style={styles.statusMessage}>
-              <Text style={styles.text}>Se ha enviado la checklist.</Text>
+              <Text style={styles.text}>Se ha enviado la checklist</Text>
             </View>
-            <View>
+            <View style={styles.backButtonContainer}>
               <Button
+                buttonStyle={styles.backButton}
+                color="#57c962"
                 title="Regresar"
                 onPress={this.props.onBack}
               />
@@ -304,5 +304,8 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderColor: '#b36217',
+  },
+  backButtonContainer:{
+    padding: 20,
   }
 });
