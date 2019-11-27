@@ -33,7 +33,7 @@ render(){
         })
       }
       style={styles.btnMenu}  >
-      <Text style={styles.text} > Inventario </Text>
+      <Text style={styles.text} > Equipo </Text>
     </TouchableOpacity>
 
     <TouchableOpacity
@@ -45,7 +45,7 @@ render(){
         })
       }
       style={styles.btnMenu}>
-      <Text style={styles.text} > Ambulancia </Text>
+      <Text style={styles.text} > Unidad </Text>
     </TouchableOpacity>
 
     </View>
