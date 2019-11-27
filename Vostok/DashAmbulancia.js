@@ -7,6 +7,7 @@ import background from './imagenes/home_background.jpg';
 //logo
 import logo from './imagenes/logo.png';
 import ambulance from './imagenes/ambulance.png'
+import redAmbulance from './imagenes/redAmbulance.png'
 
 export default class Login extends React.Component {
 
@@ -50,28 +51,23 @@ export default class Login extends React.Component {
       });
     }
 
-    let buttonsArray = [];
-    this.state.ambulancias.forEach(
-      (ambulancia) => {
-        buttonsArray.push(
-          <TouchableOpacity key={ambulancia.id}
-            onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
-            style={styles.ambulanceContainer} >
-            <View style={styles.dir}>
-              <Image style={styles.ambulance}
-                  source={ambulance}
-                  resizeMode="contain"
-              />
-              <Text style={styles.text}> {ambulancia.nombre} </Text>
-            </View>
-          </TouchableOpacity>
-        )
-      }
-    );
+    let buttonsArray = this.state.ambulancias.map(ambulancia => {
+      let ready = ambulancia.inventarioListo && ambulancia.ambulanciaLista
+      return(
+        <TouchableOpacity key={ambulancia.id}
+          onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
+          style={styles.ambulanceContainer} >
+          <View style={styles.dir}>
+            <Image style={styles.ambulance}
+                source={ready? redAmbulance : ambulance}
+                resizeMode="contain"
+            />
+            <Text style={[styles.text, {color: ready?  'red': 'white'}]}> {ambulancia.nombre} </Text>
+          </View>
+        </TouchableOpacity>
+      )
+    })
     return (
-
-
-
       <ImageBackground source={background} style={styles.container}>
 
       <Text style={styles.title}>   Ambulancias   </Text>

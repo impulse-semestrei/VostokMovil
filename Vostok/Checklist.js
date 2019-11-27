@@ -1,21 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button,TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Button } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
-
 
 export default class Checklist extends React.Component {
 
   constructor(props){
       super(props);
       this.state = {
-        text:"",
-        materiales:null,
-        isLoading:true,
-        isLast:false,
-        isFirst:true,
-        isSent:false,
-        observaciones:""
+        text: "",
+        materials: null,
+        isLoading: true,
+        isLast: false,
+        isFirst: true,
+        isSent: false,
+        isReady: false,
+        observations: "",
+        missing: [],
       }
     }
 
@@ -25,11 +26,13 @@ export default class Checklist extends React.Component {
         .then((responseJson) => {
           this.setState({
             isLoading: false,
-            materiales: responseJson.materiales,
+            materials: responseJson.materiales,
             isLast: false,
             isFirst: true,
             isSent:false,
-            observaciones:""
+            isReady: false,
+            observations: "",
+            missing: [],
           }
         );
         })
@@ -37,13 +40,54 @@ export default class Checklist extends React.Component {
           console.error(error);
         });
      }
-
+    
     render(){
       if (this.state.isSent){
+        if(!this.state.isReady){
+          let items = this.state.missing.map(item => {
+            return(
+              <View key={item.id} style={styles.missingRow}>
+                <Text style={styles.missingItemData}>{item.nombre}</Text>
+                <Text style={styles.missingItemData}>{item.objetivo - item.cantidad}</Text>
+              </View>
+            )
+          })
+          return(
+            <View style={styles.container}>
+              <View style={styles.text}>
+                <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
+              </View>
+              <View style={{flex:3, flexDirection:"column"}}>
+                <View>
+                  <Text style={styles.tableTitle}>Faltantes:</Text>
+                </View>
+                <ScrollView style={styles.scrollView}>
+                  {items}
+                </ScrollView>
+              </View>
+              <View style={styles.backButtonContainer}>
+                <Button
+                  buttonStyle={styles.backButton}
+                  color="#57c962"
+                  title="Regresar"
+                  onPress={this.props.onBack}
+                />              
+              </View>
+            </View>
+          )
+        }
         return(
           <View style={styles.container}>
             <View style={styles.statusMessage}>
               <Text style={styles.text}>Se ha enviado la checklist</Text>
+            </View>
+            <View style={styles.backButtonContainer}>
+              <Button
+                buttonStyle={styles.backButton}
+                color="#57c962"
+                title="Regresar"
+                onPress={this.props.onBack}
+              />
             </View>
           </View>
         )
@@ -56,9 +100,9 @@ export default class Checklist extends React.Component {
         )
       }
       let cards = []
-      this.state.materiales.forEach(material => cards.push(material))
-      let observacionesIndex = this.state.materiales.length
-      cards.push({"nombre": "observaciones"})
+      this.state.materials.forEach(material => cards.push(material))
+      let observationsIndex = this.state.materials.length
+      cards.push({"nombre": "observations"})
       cards.push({"nombre": "last"})
       return(
         <View style={styles.container}>
@@ -76,7 +120,7 @@ export default class Checklist extends React.Component {
                       </View>
                     )
                   }
-                  if(material.nombre == "observaciones"){
+                  if(material.nombre == "observations"){
                     return(
                       <View style={styles.card}>
                           <Text style={styles.text}>Observaciones Generales</Text>
@@ -87,11 +131,11 @@ export default class Checklist extends React.Component {
                               placeholder={'Escribe aqui'}
                               maxLength={250}
                               numberOfLines={3}
-                              defaultValue={this.state.observaciones}
+                              defaultValue={this.state.observations}
                               onChangeText={
                                 text => {
                                   let copy = this.state
-                                  copy.observaciones = text
+                                  copy.observations = text
                                   this.setState(copy)
                                 }
                               }
@@ -112,7 +156,7 @@ export default class Checklist extends React.Component {
                             onChange={
                               text => {
                                 let copy = this.state
-                                for(let item of copy.materiales){
+                                for(let item of copy.materials){
                                   if(item.id == material.id){
                                     item.cantidad = parseInt(text)
                                     this.setState(copy)
@@ -133,7 +177,7 @@ export default class Checklist extends React.Component {
                   let copy = this.state
                   copy.isLast = false
                   copy.isFirst = false
-                  if(cardIndex == observacionesIndex)
+                  if(cardIndex == observationsIndex)
                     copy.isLast = true
                   this.setState(copy)
                 }
@@ -150,21 +194,23 @@ export default class Checklist extends React.Component {
                 }
               }
               onSwipedAll={
-                () => {
+                async () => {
+
+                  let missing = this.state.materials.filter(material => material.cantidad < material.objetivo)
+                  let isReady = missing.length == 0
+
                   let data = {
                     nombre_paramedico: this.props.nombre_paramedico,
                     email_paramedico: this.props.email_paramedico,
-                    materiales: this.state.materiales,
-                    observaciones: this.state.observaciones
+                    materiales: this.state.materials,
+                    observaciones: this.state.observations,
                   }
 
                   console.log(data)
+                  console.log(missing)
+                  console.log(isReady)
 
-                  let copy = this.state
-                  copy.isSent = true
-                  this.setState(copy)
-
-                  fetch(this.props.url, {
+                  await fetch(this.props.url, {
                     method: 'POST',
                     headers: {
                       Accept: 'application/json',
@@ -172,6 +218,12 @@ export default class Checklist extends React.Component {
                     },
                     body: JSON.stringify(data),
                   });
+
+                  let copy = this.state
+                  copy.isSent = true
+                  copy.missing = missing
+                  copy.isReady = isReady
+                  this.setState(copy)
                 }
               }
               cardIndex={0}
@@ -206,25 +258,54 @@ const styles = StyleSheet.create({
     fontSize: 55,
     backgroundColor: "transparent"
   },
-  TextBox:{
+  TextBox: {
     backgroundColor: '#E8E8E8',
     justifyContent: 'center'
   },
-  objetivo:{
+  objetivo: {
     fontSize: 25,
     color : 'green',
     textAlign:'center',
   },
-  textInputContainer:{
+  textInputContainer: {
     borderWidth: 1,
     borderColor: 'gray',
     marginTop: 10,
     marginLeft: 10,
     marginRight:10,
   },
-  textInput:{
+  textInput: {
     fontSize: 20,
-    color : 'black',
-
+    color: 'black',
+  },
+  missingItemData: {
+    fontSize: 30,
+    marginLeft: 10,
+    marginRight: 10,
+    flex:1, 
+    alignSelf: 'stretch',
+  },
+  missingRow: {
+    flex:1, 
+    flexDirection: 'row',
+    borderColor: '#b36217',
+    borderTopWidth: 1,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  tableTitle: {
+    textAlign: "center",
+    fontSize: 40,
+  },
+  scrollView: {
+    backgroundColor: '#e39d5b',
+    margin: 10,
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#b36217',
+  },
+  backButtonContainer:{
+    padding: 20,
   }
 });
