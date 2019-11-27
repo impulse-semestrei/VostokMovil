@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Button } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
 
@@ -40,14 +40,14 @@ export default class Checklist extends React.Component {
           console.error(error);
         });
      }
-
+    
     render(){
       if (this.state.isSent){
         if(!this.state.isReady){
           return(
             <View style={styles.container}>
               <View style={styles.text}>
-                <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>La checklist ha sido enviada</Text>
+                <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
               </View>
               <View>
                 <View>
@@ -69,13 +69,25 @@ export default class Checklist extends React.Component {
                   />
                 </ScrollView>
               </View>
+              <View>
+                <Button
+                  title="Regresar"
+                  onPress={this.props.onBack}
+                />              
+              </View>
             </View>
           )
         }
         return(
           <View style={styles.container}>
             <View style={styles.statusMessage}>
-              <Text style={styles.text}>Se ha enviado la checklist</Text>
+              <Text style={styles.text}>Se ha enviado la checklist.</Text>
+            </View>
+            <View>
+              <Button
+                title="Regresar"
+                onPress={this.props.onBack}
+              />
             </View>
           </View>
         )
