@@ -50,24 +50,24 @@ export default class Login extends React.Component {
       });
     }
 
-    let buttonsArray = [];
-    this.state.ambulancias.forEach(
-      (ambulancia) => {
-        buttonsArray.push(
-          <TouchableOpacity key={ambulancia.id}
-            onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
-            style={styles.ambulanceContainer} >
-            <View style={styles.dir}>
-              <Image style={styles.ambulance}
-                  source={ambulance}
-                  resizeMode="contain"
-              />
-              <Text style={styles.text}> {ambulancia.nombre} </Text>
-            </View>
-          </TouchableOpacity>
-        )
-      }
-    );
+    let buttonsArray = this.state.ambulancias.map(ambulancia => {
+      let imgSource = ambulance
+      if(ambulancia.inventarioListo && ambulancia.ambulanciaLista)
+        imgSource = './imagenes/redAmbulance.png'
+      return(
+        <TouchableOpacity key={ambulancia.id}
+          onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
+          style={styles.ambulanceContainer} >
+          <View style={styles.dir}>
+            <Image style={styles.ambulance}
+                source={imgSource}
+                resizeMode="contain"
+            />
+            <Text style={styles.text}> {ambulancia.nombre} </Text>
+          </View>
+        </TouchableOpacity>
+      )
+    })
     return (
 
 
