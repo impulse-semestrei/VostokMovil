@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput, FlatList, ScrollView, Button } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
-
+import background from './imagenes/home_background.jpg';
 export default class Checklist extends React.Component {
 
   constructor(props){
@@ -105,7 +105,7 @@ export default class Checklist extends React.Component {
       cards.push({"nombre": "observations"})
       cards.push({"nombre": "last"})
       return(
-        <View style={styles.container}>
+        <ImageBackground source={background} style={styles.container}>
           <Swiper
               cards={cards}
               disableRightSwipe = {this.state.isFirst}
@@ -267,10 +267,11 @@ export default class Checklist extends React.Component {
                 }
               }
               cardIndex={0}
-              backgroundColor={'#e47c1d'}
+              backgroundColor={'transparent'}
               stackSize= {3}>
           </Swiper>
-      </View>
+      </ImageBackground>
+
     );
 
 
@@ -279,7 +280,6 @@ export default class Checklist extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e47c1d"
   },
   statusMessage: {
     flex: 1,
@@ -289,9 +289,9 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: "#F6A02C",
+    borderColor: "#fee0c8",
     justifyContent: "center",
-    backgroundColor: "#FFFFFF"
+    backgroundColor: '#fee0c8'
   },
   text: {
     textAlign: "center",
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   },
   rightSwipeContainer: {
     height: 50,
-    width: 110,
+    width: 120,
 
   },
   rightSwipe: {
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   leftSwipeContainer: {
     height: 50,
     width: 110,
-    marginRight:15
+    marginRight:16
   },
   leftSwipe: {
     textAlign:'center'
@@ -322,9 +322,7 @@ const styles = StyleSheet.create({
   boxTutorialContainer: {
     height: 50,
     width: 110,
-    marginRight:20
-
-
+    marginRight:12
   },
   boxTutorial: {
     textAlign:'center'

@@ -67,10 +67,4 @@ export default StyleSheet.create({
     borderWidth: 0.3  ,
     borderColor: '#ffc1bd'
   },
-  infoContainer: {
-    color: '#ffc1bd',
-    borderRadius: 100,
-    borderWidth: 100,
-    borderColor: 'white'
-  },
 });
