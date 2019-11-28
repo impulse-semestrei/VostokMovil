@@ -58,4 +58,19 @@ export default StyleSheet.create({
   },
   scrollView: {
   },
+  info: {
+    fontWeight: 'bold',
+    color: '#ffc1bd',
+    fontSize: 15,
+    marginBottom:20,
+    textAlign: 'center',
+    borderWidth: 0.3  ,
+    borderColor: '#ffc1bd'
+  },
+  infoContainer: {
+    color: '#ffc1bd',
+    borderRadius: 100,
+    borderWidth: 100,
+    borderColor: 'white'
+  },
 });

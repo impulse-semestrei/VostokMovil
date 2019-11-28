@@ -133,7 +133,7 @@ export default class Checklist extends React.Component {
                             onChange={
                               text => {
                                 let copy = this.state
-                                for(let item of copy.materiales){
+                                for(let item of copy.materials){
                                   if(item.id == material.id){
                                     item.cantidad = parseInt(text)
                                     this.setState(copy)
