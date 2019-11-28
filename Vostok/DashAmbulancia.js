@@ -96,7 +96,7 @@ export default class Login extends React.Component {
 
 
       </ScrollView>
-        <Text style={styles.info}> Las ambulancias en rojo fueron utilizadas recientemente </Text>
+        <Text style={styles.info}> Las unidades en rojo fueron utilizadas recientemente </Text>
       </ImageBackground>
 
     );
