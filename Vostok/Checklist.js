@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput, FlatList, ScrollView, Button } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
-
+import background from './imagenes/home_background.jpg';
 export default class Checklist extends React.Component {
 
   constructor(props){
@@ -53,43 +53,45 @@ export default class Checklist extends React.Component {
             )
           })
           return(
-            <View style={styles.container}>
-              <View style={styles.text}>
-                <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
-              </View>
-              <View style={{flex:3, flexDirection:"column"}}>
-                <View>
-                  <Text style={styles.tableTitle}>Faltantes:</Text>
+            <ImageBackground source={background} style={styles.container}>
+              <View style={styles.container}>
+                <View style={styles.text}>
+                  <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
                 </View>
-                <ScrollView style={styles.scrollView}>
-                  {items}
-                </ScrollView>
+                <View style={{flex:3, flexDirection:"column"}}>
+                  <View>
+                    <Text style={styles.tableTitle}>Faltantes:</Text>
+                  </View>
+                  <ScrollView style={styles.scrollView}>
+                    {items}
+                  </ScrollView>
+                </View>
+                <View style={styles.backButtonContainer}>
+                  <Button
+                    buttonStyle={styles.backButton}
+                    title="Regresar"
+                    onPress={this.props.onBack}
+                  />
+                </View>
+              </View>
+            </ImageBackground>
+          )
+        }
+        return(
+          <ImageBackground source={background} style={styles.container}>
+            <View style={styles.container}>
+              <View style={styles.statusMessage}>
+                <Text style={styles.statusText}>Se ha enviado la checklist</Text>
               </View>
               <View style={styles.backButtonContainer}>
                 <Button
                   buttonStyle={styles.backButton}
-                  color="#57c962"
                   title="Regresar"
                   onPress={this.props.onBack}
                 />
               </View>
             </View>
-          )
-        }
-        return(
-          <View style={styles.container}>
-            <View style={styles.statusMessage}>
-              <Text style={styles.text}>Se ha enviado la checklist</Text>
-            </View>
-            <View style={styles.backButtonContainer}>
-              <Button
-                buttonStyle={styles.backButton}
-                color="#57c962"
-                title="Regresar"
-                onPress={this.props.onBack}
-              />
-            </View>
-          </View>
+          </ImageBackground>
         )
       }
       if (this.state.isLoading){
@@ -105,7 +107,7 @@ export default class Checklist extends React.Component {
       cards.push({"nombre": "observations"})
       cards.push({"nombre": "last"})
       return(
-        <View style={styles.container}>
+        <ImageBackground source={background} style={styles.container}>
           <Swiper
               cards={cards}
               disableRightSwipe = {this.state.isFirst}
@@ -134,7 +136,7 @@ export default class Checklist extends React.Component {
                             onChange={
                               text => {
                                 let copy = this.state
-                                for(let item of copy.materiales){
+                                for(let item of copy.materials){
                                   if(item.id == material.id){
                                     item.cantidad = parseInt(text)
                                     this.setState(copy)
@@ -269,10 +271,11 @@ export default class Checklist extends React.Component {
                 }
               }
               cardIndex={0}
-              backgroundColor={'#e47c1d'}
+              backgroundColor={'transparent'}
               stackSize= {3}>
           </Swiper>
-      </View>
+      </ImageBackground>
+
     );
 
 
@@ -281,19 +284,24 @@ export default class Checklist extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e47c1d"
   },
   statusMessage: {
     flex: 1,
     justifyContent: "center"
   },
+  statusText: {
+    textAlign: "center",
+    fontSize: 55,
+    backgroundColor: "transparent",
+    color: "white"
+  },
   card: {
     flex: 1,
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: "#F6A02C",
+    borderColor: "#fee0c8",
     justifyContent: "center",
-    backgroundColor: "#FFFFFF"
+    backgroundColor: '#fee0c8'
   },
   text: {
     textAlign: "center",
@@ -307,7 +315,7 @@ const styles = StyleSheet.create({
   },
   rightSwipeContainer: {
     height: 50,
-    width: 110,
+    width: 120,
 
   },
   rightSwipe: {
@@ -316,7 +324,7 @@ const styles = StyleSheet.create({
   leftSwipeContainer: {
     height: 50,
     width: 110,
-    marginRight:15
+    marginRight:16
   },
   leftSwipe: {
     textAlign:'center'
@@ -324,9 +332,7 @@ const styles = StyleSheet.create({
   boxTutorialContainer: {
     height: 50,
     width: 110,
-    marginRight:20
-
-
+    marginRight:12
   },
   boxTutorial: {
     textAlign:'center'

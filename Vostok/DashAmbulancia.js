@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image, TouchableOpacity, Platform, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Dimensions, Button, Image, TouchableOpacity, Platform, ScrollView, Alert } from 'react-native';
 import styles from './styles/DashStyles.js';
 //FONDO DE LOGIN--
 import background from './imagenes/home_background.jpg';
@@ -51,18 +51,35 @@ export default class Login extends React.Component {
       });
     }
 
+    let confirmation = (idAmbulancia, idInventario, nombreAmbulancia) => () => {
+      Alert.alert(
+        'Confirmación',
+        'Esta ambulancia se usó recientemente ¿Seguro que quieres utilizarla?',
+        [
+          {
+            text: 'No',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'Si', onPress: redirect(idAmbulancia, idInventario, nombreAmbulancia)},
+        ],
+        {cancelable: false},
+      );
+    }
+
     let buttonsArray = this.state.ambulancias.map(ambulancia => {
-      let ready = ambulancia.inventarioListo && ambulancia.ambulanciaLista
+      let inactive = ambulancia.inventarioListo && ambulancia.ambulanciaLista
       return(
         <TouchableOpacity key={ambulancia.id}
-          onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
+        //  onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
+            onPress = {inactive? confirmation(ambulancia.id, ambulancia.idInventario, ambulancia.nombre) : redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
           style={styles.ambulanceContainer} >
           <View style={styles.dir}>
             <Image style={styles.ambulance}
-                source={ready? redAmbulance : ambulance}
+                source={inactive? redAmbulance : ambulance}
                 resizeMode="contain"
             />
-            <Text style={[styles.text, {color: ready?  'red': 'white'}]}> {ambulancia.nombre} </Text>
+            <Text style={[styles.text, {color: inactive?  '#f29191': 'white'}]}> {ambulancia.nombre} </Text>
           </View>
         </TouchableOpacity>
       )
@@ -74,10 +91,12 @@ export default class Login extends React.Component {
       <ScrollView style={styles.scrollView}>
       <View style={styles.buttonContainer}>
         { buttonsArray }
+
       </View>
 
 
       </ScrollView>
+        <Text style={styles.info}> Las unidades en rojo fueron utilizadas recientemente </Text>
       </ImageBackground>
 
     );
