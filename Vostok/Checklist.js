@@ -130,6 +130,7 @@ export default class Checklist extends React.Component {
                             style={styles.TextBox}
                             objetivo = {material.objetivo}
                             default={material.cantidad+''}
+                            labelText={material.medida}
                             onChange={
                               text => {
                                 let copy = this.state
@@ -193,6 +194,7 @@ export default class Checklist extends React.Component {
                             style={styles.TextBox}
                             objetivo = {material.objetivo}
                             default={material.cantidad+''}
+                            labelText={material.medida}
                             onChange={
                               text => {
                                 let copy = this.state

@@ -36,7 +36,7 @@ export default class TextBox extends React.Component {
 
     return(
       <View style={styles.container}>
-        <Text style={styles.label}>Cantidad: </Text>
+        <Text style={styles.label}>{this.props.labelText}: </Text>
           <TextInput
             style={styles.textInput}
             keyboardType='numeric'
