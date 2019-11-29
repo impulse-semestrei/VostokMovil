@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, TextInput, FlatList, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, TextInput,TouchableOpacity, FlatList, ScrollView, Button } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
 import background from './imagenes/home_background.jpg';
@@ -67,11 +67,13 @@ export default class Checklist extends React.Component {
                   </ScrollView>
                 </View>
                 <View style={styles.backButtonContainer}>
-                  <Button
-                    buttonStyle={styles.backButton}
-                    title="Regresar"
+                  <TouchableOpacity
+                    style={styles.backButton}
                     onPress={this.props.onBack}
-                  />
+                  >
+                    <Text style={styles.buttonText}> Entendido </Text>
+                  </TouchableOpacity>
+
                 </View>
               </View>
             </ImageBackground>
@@ -401,6 +403,19 @@ const styles = StyleSheet.create({
     borderColor: '#b36217',
   },
   backButtonContainer:{
-    padding: 20,
+    alignItems: 'center',
+    color: '#ffffff',
+    marginBottom:20
+  },
+  backButton:{
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    padding: 15
+
+  },
+  buttonText:{
+    color: 'black',
+    textAlign: 'center',
+    fontSize:20
+
   }
 });
