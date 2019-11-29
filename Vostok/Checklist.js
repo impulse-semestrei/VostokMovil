@@ -56,7 +56,7 @@ export default class Checklist extends React.Component {
             <ImageBackground source={background} style={styles.container}>
               <View style={styles.container}>
                 <View style={styles.text}>
-                  <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
+                  <Text style={[styles.statusText,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
                 </View>
                 <View style={{flex:3, flexDirection:"column"}}>
                   <View>
@@ -390,6 +390,7 @@ const styles = StyleSheet.create({
   tableTitle: {
     textAlign: "center",
     fontSize: 40,
+    color: "white"
   },
   scrollView: {
     backgroundColor: '#e39d5b',
