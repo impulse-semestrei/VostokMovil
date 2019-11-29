@@ -1,5 +1,6 @@
 import Checklist from './Checklist.js'
 import React from 'react';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 export default class EstadoAmbulancia extends React.Component {
   constructor(props){
@@ -12,10 +13,23 @@ export default class EstadoAmbulancia extends React.Component {
         url={'http://10.0.2.2:8000/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/'}
         nombre_paramedico={this.props.navigation.getParam('nombre_paramedico')}
         email_paramedico={this.props.navigation.getParam('email_paramedico')}
-        onBack={() => this.props.navigation.navigate('Ambulancia', {
-          nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
-          email_paramedico: this.props.navigation.getParam('email_paramedico'),
-        })}
+        onBack={() => this.props.navigation.dispatch(
+          StackActions.reset(
+            {
+              index: 1,
+              actions: [
+                NavigationActions.navigate({routeName: 'First'}),
+                NavigationActions.navigate({
+                  routeName: 'Ambulancia', 
+                  params: {
+                    NameOBJ: this.props.navigation.getParam('nombre_paramedico'),
+                    EmailOBJ: this.props.navigation.getParam('email_paramedico'),
+                  }
+                })
+              ]
+            }
+          )
+        )}
       />
     )
   }

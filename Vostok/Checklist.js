@@ -53,43 +53,45 @@ export default class Checklist extends React.Component {
             )
           })
           return(
-            <View style={styles.container}>
-              <View style={styles.text}>
-                <Text style={[styles.text,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
-              </View>
-              <View style={{flex:3, flexDirection:"column"}}>
-                <View>
-                  <Text style={styles.tableTitle}>Faltantes:</Text>
+            <ImageBackground source={background} style={styles.container}>
+              <View style={styles.container}>
+                <View style={styles.text}>
+                  <Text style={[styles.statusText,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
                 </View>
-                <ScrollView style={styles.scrollView}>
-                  {items}
-                </ScrollView>
+                <View style={{flex:3, flexDirection:"column"}}>
+                  <View>
+                    <Text style={styles.tableTitle}>Faltantes:</Text>
+                  </View>
+                  <ScrollView style={styles.scrollView}>
+                    {items}
+                  </ScrollView>
+                </View>
+                <View style={styles.backButtonContainer}>
+                  <Button
+                    buttonStyle={styles.backButton}
+                    title="Regresar"
+                    onPress={this.props.onBack}
+                  />
+                </View>
+              </View>
+            </ImageBackground>
+          )
+        }
+        return(
+          <ImageBackground source={background} style={styles.container}>
+            <View style={styles.container}>
+              <View style={styles.statusMessage}>
+                <Text style={styles.statusText}>Se ha enviado la checklist</Text>
               </View>
               <View style={styles.backButtonContainer}>
                 <Button
                   buttonStyle={styles.backButton}
-                  color="#57c962"
                   title="Regresar"
                   onPress={this.props.onBack}
                 />
               </View>
             </View>
-          )
-        }
-        return(
-          <View style={styles.container}>
-            <View style={styles.statusMessage}>
-              <Text style={styles.text}>Se ha enviado la checklist</Text>
-            </View>
-            <View style={styles.backButtonContainer}>
-              <Button
-                buttonStyle={styles.backButton}
-                color="#57c962"
-                title="Regresar"
-                onPress={this.props.onBack}
-              />
-            </View>
-          </View>
+          </ImageBackground>
         )
       }
       if (this.state.isLoading){
@@ -130,6 +132,7 @@ export default class Checklist extends React.Component {
                             style={styles.TextBox}
                             objetivo = {material.objetivo}
                             default={material.cantidad+''}
+                            labelText={material.medida}
                             onChange={
                               text => {
                                 let copy = this.state
@@ -193,6 +196,7 @@ export default class Checklist extends React.Component {
                             style={styles.TextBox}
                             objetivo = {material.objetivo}
                             default={material.cantidad+''}
+                            labelText={material.medida}
                             onChange={
                               text => {
                                 let copy = this.state
@@ -284,6 +288,12 @@ const styles = StyleSheet.create({
   statusMessage: {
     flex: 1,
     justifyContent: "center"
+  },
+  statusText: {
+    textAlign: "center",
+    fontSize: 55,
+    backgroundColor: "transparent",
+    color: "white"
   },
   card: {
     flex: 1,
@@ -380,6 +390,7 @@ const styles = StyleSheet.create({
   tableTitle: {
     textAlign: "center",
     fontSize: 40,
+    color: "white"
   },
   scrollView: {
     backgroundColor: '#e39d5b',
