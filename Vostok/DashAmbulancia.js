@@ -21,7 +21,7 @@ export default class Login extends React.Component {
     }
 
     componentDidMount(){
-      return fetch('http://rescate1app.com/ambulancia/json/')
+      return fetch('https://rescate1app.com/ambulancia/json/')
         .then((response) =>response.json())
         .then((responseJson) => {
           this.setState({

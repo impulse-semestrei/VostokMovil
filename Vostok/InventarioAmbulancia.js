@@ -10,7 +10,7 @@ export default class InventarioAmbulancia extends React.Component {
   render(){
     return(
       <Checklist
-        url={'http://rescate1app.com/inventario/'+this.props.navigation.getParam('id_inventario')+'/json/'}
+        url={'https://rescate1app.com/inventario/'+this.props.navigation.getParam('id_inventario')+'/json/'}
         nombre_paramedico={this.props.navigation.getParam('nombre_paramedico')}
         email_paramedico={this.props.navigation.getParam('email_paramedico')}
         onBack={() => this.props.navigation.dispatch(

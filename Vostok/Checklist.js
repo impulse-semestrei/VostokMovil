@@ -151,15 +151,22 @@ export default class Checklist extends React.Component {
 
                         <View style={styles.tutorialContainer}>
                           <View style={styles.leftSwipeContainer}>
-                            <Text style={styles.arrowleft}> ↪ </Text>
+                            <Text
+                            style={styles.arrowleft}
+                            allowFontScaling={true}
+                            > ↪ </Text>
                             <Text style={styles.leftSwipe}> Desliza hacia la derecha para ir al material anterior</Text>
                           </View>
-                          <View style={styles.boxTutorialContainer}>
-                            <Text style={styles.boxTutorial}> Escribe la cantidad actual del material</Text>
+                          <View style={styles.boxTutorialContainer}
+                          >
+                            <Text style={styles.boxTutorial}
+                            allowFontScaling={true}
+                            > Escribe la cantidad actual del material</Text>
                           </View>
                           <View style={styles.rightSwipeContainer}>
                           <Text style={styles.arrowright}> ↩ </Text>
-                            <Text style={styles.rightSwipe}> Desliza hacia la izquierda para ir al siguiente material</Text>
+                            <Text style={styles.rightSwipe}
+                            allowFontScaling={true}> Desliza hacia la izquierda para ir al siguiente material</Text>
                           </View>
                         </View>
                       </View>
@@ -313,7 +320,7 @@ const styles = StyleSheet.create({
   tutorialContainer: {
   flexDirection: 'row',
   justifyContent:'flex-end',
-  alignItems: 'stretch'
+  alignItems: 'center'
   },
   rightSwipeContainer: {
     height: 50,
@@ -321,7 +328,8 @@ const styles = StyleSheet.create({
 
   },
   rightSwipe: {
-    textAlign:'center'
+    textAlign:'center',
+    fontSize:10
   },
   leftSwipeContainer: {
     height: 50,

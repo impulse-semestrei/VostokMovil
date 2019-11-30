@@ -20,7 +20,9 @@ render(){
   return (
 
     <ImageBackground source={background} style={styles.container}>
-    <Text style={styles.title}>   Checklists   </Text>
+
+      <Text style={styles.title}>   Checklists   </Text>
+
     <Text style={styles.num}>  Ambulancia {this.props.navigation.getParam('nombre_ambulancia')}</Text>
     <View style={styles.buttonContainer}>
 
