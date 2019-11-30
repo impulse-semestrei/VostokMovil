@@ -16,7 +16,7 @@ export default class TextBox extends React.Component {
       return(
         <View style={styles.container}>
 
-          <Text style={styles.label}>Cantidad: </Text>
+          <Text style={styles.label}>{this.props.labelText}:  </Text>
             <TextInput
               style={styles.textInputWrong}
               keyboardType='numeric'
@@ -58,8 +58,6 @@ export default class TextBox extends React.Component {
 }
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
-    marginHorizontal: 140,
     alignSelf:'center'
   },
   label: {

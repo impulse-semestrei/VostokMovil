@@ -41,11 +41,12 @@ export default StyleSheet.create({
 },
   title :{
     color: 'rgba(255, 255, 255, 0.9)',
-    fontSize: 62,
+    fontSize: 55,
     textAlign: 'center',
     marginTop:7,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
+
   num :{
     color: 'rgba(255, 255, 255, 0.9)',
     fontSize: 22,

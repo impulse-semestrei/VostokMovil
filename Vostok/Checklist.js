@@ -5,6 +5,12 @@ import TextBox from './TextBox.js'
 import background from './imagenes/home_background.jpg';
 export default class Checklist extends React.Component {
 
+
+
+
+
+
+
   constructor(props){
       super(props);
       this.state = {
@@ -128,7 +134,7 @@ export default class Checklist extends React.Component {
                     return(
                       <View style={styles.card}>
 
-                          <Text style={styles.text}>{material.nombre}</Text>
+                          <Text style={styles.text} allowFontScaling={false}>{material.nombre}</Text>
                           <Text style={styles.objetivo}>{"Objetivo:  "+material.objetivo}</Text>
                           <TextBox
                             style={styles.TextBox}
@@ -148,18 +154,21 @@ export default class Checklist extends React.Component {
                               }
                             }
                           />
-
                         <View style={styles.tutorialContainer}>
                           <View style={styles.leftSwipeContainer}>
-                            <Text style={styles.arrowleft}> ↪ </Text>
-                            <Text style={styles.leftSwipe}> Desliza hacia la derecha para ir al material anterior</Text>
+                            <Text
+                            style={styles.arrowleft}
+                            allowFontScaling={false}
+                            minimumFontScale={10}
+                            maxFontSizeMultiplier={50}> ↪ </Text>
+                            <Text style={styles.leftSwipe}  allowFontScaling={false} maxFontSizeMultiplier={15}> Desliza hacia la derecha para ir al material anterior</Text>
                           </View>
                           <View style={styles.boxTutorialContainer}>
-                            <Text style={styles.boxTutorial}> Escribe la cantidad actual del material</Text>
+                            <Text style={styles.boxTutorial} allowFontScaling={false} maxFontSizeMultiplier={15}> Escribe la cantidad actual del material</Text>
                           </View>
                           <View style={styles.rightSwipeContainer}>
-                          <Text style={styles.arrowright}> ↩ </Text>
-                            <Text style={styles.rightSwipe}> Desliza hacia la izquierda para ir al siguiente material</Text>
+                          <Text style={styles.arrowright}  allowFontScaling={false} maxFontSizeMultiplier={50}> ↩ </Text>
+                            <Text style={styles.rightSwipe} allowFontScaling={false} maxFontSizeMultiplier={15}> Desliza hacia la izquierda para ir al siguiente material</Text>
                           </View>
                         </View>
                       </View>
@@ -307,37 +316,41 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    fontSize: 55,
+    fontSize: 50,
     backgroundColor: "transparent"
   },
   tutorialContainer: {
   flexDirection: 'row',
-  justifyContent:'flex-end',
-  alignItems: 'stretch'
+  alignSelf: 'center',
+
   },
   rightSwipeContainer: {
     height: 50,
-    width: 120,
+    width: 100,
 
   },
   rightSwipe: {
-    textAlign:'center'
+    textAlign:'center',
+    fontSize: 13
+
   },
   leftSwipeContainer: {
     height: 50,
-    width: 110,
-    marginRight:16
+    width: 100,
+
   },
   leftSwipe: {
-    textAlign:'center'
+    textAlign:'center',
+    fontSize: 13
   },
   boxTutorialContainer: {
     height: 50,
-    width: 110,
-    marginRight:12
+    width: 70,
   },
   boxTutorial: {
-    textAlign:'center'
+    textAlign:'center',
+    fontSize: 13,
+    alignSelf: 'center'
   },
   arrowleft: {
     fontSize:50,
