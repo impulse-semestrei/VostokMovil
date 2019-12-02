@@ -41,17 +41,19 @@ export default class Login extends React.Component {
       )
     }
 
-    let redirect = (idAmbulancia, idInventario, nombreAmbulancia) => () => {
+    let redirect = (idAmbulancia, idInventario, idBotiquin, idMonitor, nombreAmbulancia) => () => {
       this.props.navigation.navigate('Menu', {
         nombre_paramedico: this.props.navigation.getParam('NameOBJ'),
         email_paramedico: this.props.navigation.getParam('EmailOBJ'),
         id_ambulancia: idAmbulancia,
         id_inventario: idInventario,
+        id_botiquin: idBotiquin,
+        id_monitor: idMonitor,
         nombre_ambulancia: nombreAmbulancia
       });
     }
 
-    let confirmation = (idAmbulancia, idInventario, nombreAmbulancia) => () => {
+    let confirmation = (idAmbulancia, idInventario, idBotiquin, idMonitor, nombreAmbulancia) => () => {
       Alert.alert(
         'Confirmación',
         'Esta ambulancia se usó recientemente ¿Seguro que quieres utilizarla?',
@@ -61,7 +63,7 @@ export default class Login extends React.Component {
             onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
-          {text: 'Si', onPress: redirect(idAmbulancia, idInventario, nombreAmbulancia)},
+          {text: 'Si', onPress: redirect(idAmbulancia, idInventario, idBotiquin, idMonitor, nombreAmbulancia)},
         ],
         {cancelable: false},
       );
@@ -72,7 +74,12 @@ export default class Login extends React.Component {
       return(
         <TouchableOpacity key={ambulancia.id}
         //  onPress = {redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
-            onPress = {inactive? confirmation(ambulancia.id, ambulancia.idInventario, ambulancia.nombre) : redirect(ambulancia.id, ambulancia.idInventario, ambulancia.nombre)}
+            onPress = {
+              inactive? 
+              confirmation(ambulancia.id, ambulancia.idInventario, ambulancia.idBotiquin, ambulancia.idMonitor, ambulancia.nombre) 
+              :
+              redirect(ambulancia.id, ambulancia.idInventario, ambulancia.idBotiquin, ambulancia.idMonitor, ambulancia.nombre)
+            }
           style={styles.ambulanceContainer} >
           <View style={styles.dir}>
             <Image style={styles.ambulance}

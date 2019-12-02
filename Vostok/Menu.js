@@ -29,7 +29,8 @@ render(){
         () => this.props.navigation.navigate('InventarioAmbulancia', {
           nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
           email_paramedico: this.props.navigation.getParam('email_paramedico'),
-          id_inventario: this.props.navigation.getParam('id_inventario')
+          id_inventario: this.props.navigation.getParam('id_inventario'),
+          nombre: 'inventario',
         })
       }
       style={styles.btnMenu}  >
@@ -38,10 +39,37 @@ render(){
 
     <TouchableOpacity
       onPress={
+        () => this.props.navigation.navigate('InventarioAmbulancia', {
+          nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
+          email_paramedico: this.props.navigation.getParam('email_paramedico'),
+          id_inventario: this.props.navigation.getParam('id_botiquin'),
+          nombre: 'botiquin',
+        })
+      }
+      style={styles.btnMenu}  >
+      <Text style={styles.text} > Botiquin </Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity
+      onPress={
+        () => this.props.navigation.navigate('InventarioAmbulancia', {
+          nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
+          email_paramedico: this.props.navigation.getParam('email_paramedico'),
+          id_inventario: this.props.navigation.getParam('id_monitor'),
+          nombre: 'monitor',
+        })
+      }
+      style={styles.btnMenu}  >
+      <Text style={styles.text} > Monitor </Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity
+      onPress={
         () => this.props.navigation.navigate('EstadoAmbulancia', {
           nombre_paramedico: this.props.navigation.getParam('nombre_paramedico'),
           email_paramedico: this.props.navigation.getParam('email_paramedico'),
-          id_ambulancia: this.props.navigation.getParam('id_ambulancia')
+          id_ambulancia: this.props.navigation.getParam('id_ambulancia'),
+          nombre: 'ambulancia',
         })
       }
       style={styles.btnMenu}>

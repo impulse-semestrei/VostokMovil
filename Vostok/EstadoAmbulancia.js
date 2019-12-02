@@ -13,6 +13,7 @@ export default class EstadoAmbulancia extends React.Component {
         url={'http://10.0.2.2:8000/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/'}
         nombre_paramedico={this.props.navigation.getParam('nombre_paramedico')}
         email_paramedico={this.props.navigation.getParam('email_paramedico')}
+        name={this.props.navigation.getParam('nombre')}
         onBack={() => this.props.navigation.dispatch(
           StackActions.reset(
             {

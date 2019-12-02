@@ -17,7 +17,6 @@ export default class Checklist extends React.Component {
         isSent: false,
         isReady: false,
         observations: "",
-        hidePin: true,
       }
     }
 
@@ -33,7 +32,6 @@ export default class Checklist extends React.Component {
             isSent:false,
             isReady: false,
             observations: "",
-            hidePin: true,
           }
         );
         })
@@ -70,10 +68,9 @@ export default class Checklist extends React.Component {
       }
       let cards = []
       this.state.materials.forEach(material => cards.push(material))
-      let lastEditableIndex = this.state.materials.length + 2
-      cards.push({"nombre": "observations"})
+      let lastEditableIndex = this.state.materials.length + 1
       cards.push({"nombre": "missing"})
-      cards.push({"nombre": "pin"})
+      cards.push({"nombre": "observations"})
       cards.push({"nombre": "last"})
       return(
         <ImageBackground source={background} style={styles.container}>
@@ -199,30 +196,6 @@ export default class Checklist extends React.Component {
                       </View>
                     )
                   }
-                  if(material.nombre == "pin"){
-                    return(
-                      <View style={styles.card}>
-                        <View>
-                          <Text style={styles.text}>Pin de la guardia anterior:</Text>
-                        </View>
-                        <View>
-                          <TextInput 
-                            secureTextEntry={this.state.hidePin}
-                          />
-                          <Button
-                            buttonStyle={styles.backButton}
-                            title={this.state.hidePin? "Mostrar Pin" : "Ocultar Pin"}
-                            onPress={() => {
-                              console.log(11111)
-                              let copy = this.state
-                              copy.hidePin = !this.state.hidePin
-                              this.setState(copy)
-                            }}
-                            />
-                        </View>
-                      </View>
-                    )
-                  }
                   return (
                       <View style={styles.card}>
                           <Text style={styles.text}>{material.nombre}</Text>
@@ -276,6 +249,7 @@ export default class Checklist extends React.Component {
                 async () => {
 
                   let data = {
+                    nombre: this.props.name,
                     nombre_paramedico: this.props.nombre_paramedico,
                     email_paramedico: this.props.email_paramedico,
                     materiales: this.state.materials,
