@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput, FlatList, ScrollView, Button } from 'react-native';
 import Swiper from 'react-native-deck-swiper'
 import TextBox from './TextBox.js'
+import EditableTable from './EditableTable.js'
 import background from './imagenes/home_background.jpg';
 export default class Checklist extends React.Component {
 
@@ -16,7 +17,7 @@ export default class Checklist extends React.Component {
         isSent: false,
         isReady: false,
         observations: "",
-        missing: [],
+        hidePin: true,
       }
     }
 
@@ -32,7 +33,7 @@ export default class Checklist extends React.Component {
             isSent:false,
             isReady: false,
             observations: "",
-            missing: [],
+            hidePin: true,
           }
         );
         })
@@ -43,40 +44,6 @@ export default class Checklist extends React.Component {
 
     render(){
       if (this.state.isSent){
-        if(!this.state.isReady){
-          let items = this.state.missing.map(item => {
-            return(
-              <View key={item.id} style={styles.missingRow}>
-                <Text style={styles.missingItemData}>{item.nombre}</Text>
-                <Text style={styles.missingItemData}>{item.objetivo - item.cantidad}</Text>
-              </View>
-            )
-          })
-          return(
-            <ImageBackground source={background} style={styles.container}>
-              <View style={styles.container}>
-                <View style={styles.text}>
-                  <Text style={[styles.statusText,{marginTop:20, marginBottom:10}]}>Se ha enviado la checklist</Text>
-                </View>
-                <View style={{flex:3, flexDirection:"column"}}>
-                  <View>
-                    <Text style={styles.tableTitle}>Faltantes:</Text>
-                  </View>
-                  <ScrollView style={styles.scrollView}>
-                    {items}
-                  </ScrollView>
-                </View>
-                <View style={styles.backButtonContainer}>
-                  <Button
-                    buttonStyle={styles.backButton}
-                    title="Regresar"
-                    onPress={this.props.onBack}
-                  />
-                </View>
-              </View>
-            </ImageBackground>
-          )
-        }
         return(
           <ImageBackground source={background} style={styles.container}>
             <View style={styles.container}>
@@ -103,8 +70,10 @@ export default class Checklist extends React.Component {
       }
       let cards = []
       this.state.materials.forEach(material => cards.push(material))
-      let observationsIndex = this.state.materials.length
+      let lastEditableIndex = this.state.materials.length + 2
       cards.push({"nombre": "observations"})
+      cards.push({"nombre": "missing"})
+      cards.push({"nombre": "pin"})
       cards.push({"nombre": "last"})
       return(
         <ImageBackground source={background} style={styles.container}>
@@ -188,6 +157,72 @@ export default class Checklist extends React.Component {
                       </View>
                     )
                   }
+                  if(material.nombre == "missing"){
+                    let missing = this.state.materials.filter(material => material.cantidad < material.objetivo)
+                    if(missing.length == 0){
+                      return(
+                        <View style={styles.card}>
+                          <View>
+                            <Text style={styles.text}>No hay materiales faltantes.</Text>
+                          </View>
+                          <View>
+                            <Text style={styles.text}>Desliza hacia la izquierda para continuar.</Text>
+                          </View>
+                        </View>
+                      )
+                    }
+                    return(
+                      <View style={styles.card}>
+                        <View>
+                          <Text style={styles.text}>Faltantes:</Text>
+                        </View>
+                        <EditableTable 
+                          items={missing}
+                          onChange={ missingMaterials => {
+                            let copy = this.state
+                            missingMaterials.forEach( missingMaterial => {
+                              // search for the material with same id in the state
+                              for(let material of copy.materials){
+                                if(material.id == missingMaterial.id){
+                                  material.cantidad = missingMaterial.cantidad
+                                  return
+                                }
+                              }
+                            })
+                            // save new material quantities
+                            this.setState(copy)
+                          }}
+                        />
+                        <View>
+                            <Text>Desliza hacia la izquierda para continuar.</Text>
+                          </View>
+                      </View>
+                    )
+                  }
+                  if(material.nombre == "pin"){
+                    return(
+                      <View style={styles.card}>
+                        <View>
+                          <Text style={styles.text}>Pin de la guardia anterior:</Text>
+                        </View>
+                        <View>
+                          <TextInput 
+                            secureTextEntry={this.state.hidePin}
+                          />
+                          <Button
+                            buttonStyle={styles.backButton}
+                            title={this.state.hidePin? "Mostrar Pin" : "Ocultar Pin"}
+                            onPress={() => {
+                              console.log(11111)
+                              let copy = this.state
+                              copy.hidePin = !this.state.hidePin
+                              this.setState(copy)
+                            }}
+                            />
+                        </View>
+                      </View>
+                    )
+                  }
                   return (
                       <View style={styles.card}>
                           <Text style={styles.text}>{material.nombre}</Text>
@@ -221,7 +256,7 @@ export default class Checklist extends React.Component {
                   let copy = this.state
                   copy.isLast = false
                   copy.isFirst = false
-                  if(cardIndex == observationsIndex)
+                  if(cardIndex == lastEditableIndex)
                     copy.isLast = true
                   this.setState(copy)
                 }
@@ -240,9 +275,6 @@ export default class Checklist extends React.Component {
               onSwipedAll={
                 async () => {
 
-                  let missing = this.state.materials.filter(material => material.cantidad < material.objetivo)
-                  let isReady = missing.length == 0
-
                   let data = {
                     nombre_paramedico: this.props.nombre_paramedico,
                     email_paramedico: this.props.email_paramedico,
@@ -251,8 +283,6 @@ export default class Checklist extends React.Component {
                   }
 
                   console.log(data)
-                  console.log(missing)
-                  console.log(isReady)
 
                   await fetch(this.props.url, {
                     method: 'POST',
@@ -265,8 +295,6 @@ export default class Checklist extends React.Component {
 
                   let copy = this.state
                   copy.isSent = true
-                  copy.missing = missing
-                  copy.isReady = isReady
                   this.setState(copy)
                 }
               }
