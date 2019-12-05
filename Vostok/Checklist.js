@@ -21,6 +21,7 @@ export default class Checklist extends React.Component {
         isFirst: true,
         isSent: false,
         isReady: false,
+        submitPending: false,
         observations: "",
         missing: [],
       }
@@ -37,6 +38,7 @@ export default class Checklist extends React.Component {
             isFirst: true,
             isSent:false,
             isReady: false,
+            submitPending: false,
             observations: "",
             missing: [],
           }
@@ -118,10 +120,16 @@ export default class Checklist extends React.Component {
         <ImageBackground source={background} style={styles.container}>
           <Swiper
               cards={cards}
+              // disable right swipe when is first card
               disableRightSwipe = {this.state.isFirst}
+              // enable top swipe when is last card
               disableTopSwipe = {!this.state.isLast}
+              // never swipe bottom
               disableBottomSwipe = {true}
-              disableLeftSwipe = {this.state.isLast}
+              // disable swipe left when is last card
+              disableLeftSwipe = {
+                this.state.isLast && !this.state.submitPending
+              }
               renderCard={(material) => {
                   if(material.nombre == "last"){
                     return(
@@ -226,12 +234,26 @@ export default class Checklist extends React.Component {
               }}
               goBackToPreviousCardOnSwipeRight = {true}
               showSecondCard={false}
+              onSwipedTop={
+                (cardIndex) => {
+                  // sometimes onswipedup fails and doesnt do onswipedall
+                  // and deck swipes right without running onswipedright
+                  console.log('swipetop')
+                  console.log(cardIndex)
+                  let copy = this.state
+                  copy.submitPending = true
+                  this.setState(copy)
+                }
+              }
+              onSwipedBottom={(cardIndex)=>console.log('swipedown at idx '+cardIndex)}
               onSwipedLeft={
                 (cardIndex) => {
                   console.log('swipeleft')
                   let copy = this.state
                   copy.isLast = false
                   copy.isFirst = false
+                  copy.submitPending = false
+                  console.log(cardIndex)
                   if(cardIndex == observationsIndex)
                     copy.isLast = true
                   this.setState(copy)
@@ -240,9 +262,11 @@ export default class Checklist extends React.Component {
               onSwipedRight={
                 (cardIndex) => {
                   console.log('swiperight')
+                  console.log(cardIndex)
                   let copy = this.state
                   copy.isFirst = false
                   copy.isLast = false
+                  copy.submitPending = false
                   if(cardIndex == 1)
                     copy.isFirst = true
                   this.setState(copy)
