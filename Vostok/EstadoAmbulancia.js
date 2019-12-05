@@ -10,7 +10,7 @@ export default class EstadoAmbulancia extends React.Component {
   render(){
     return(
       <Checklist
-        url={'https://rescate1app.com/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/'}
+        url={'http://10.0.2.2:8000/ambulancia/'+this.props.navigation.getParam('id_ambulancia')+'/json/'}
         nombre_paramedico={this.props.navigation.getParam('nombre_paramedico')}
         email_paramedico={this.props.navigation.getParam('email_paramedico')}
         onBack={() => this.props.navigation.dispatch(
