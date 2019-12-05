@@ -119,6 +119,8 @@ export default class Checklist extends React.Component {
       return(
         <ImageBackground source={background} style={styles.container}>
           <Swiper
+              goBackToPreviousCardOnSwipeRight = {true}
+              showSecondCard={false}
               cards={cards}
               // disable right swipe when is first card
               disableRightSwipe = {this.state.isFirst}
@@ -232,8 +234,6 @@ export default class Checklist extends React.Component {
                       </View>
                   )
               }}
-              goBackToPreviousCardOnSwipeRight = {true}
-              showSecondCard={false}
               onSwipedTop={
                 (cardIndex) => {
                   // sometimes onswipedup fails and doesnt do onswipedall
