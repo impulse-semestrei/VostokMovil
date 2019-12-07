@@ -94,11 +94,12 @@ export default class Checklist extends React.Component {
                 <Text style={styles.statusText}>Se ha enviado la checklist</Text>
               </View>
               <View style={styles.backButtonContainer}>
-                <Button
-                  buttonStyle={styles.backButton}
-                  title="Regresar"
-                  onPress={this.props.onBack}
-                />
+                <TouchableOpacity
+                    style={styles.backButton}
+                    onPress={this.props.onBack}
+                  >
+                    <Text style={styles.buttonText}> Entendido </Text>
+                  </TouchableOpacity>
               </View>
             </View>
           </ImageBackground>
